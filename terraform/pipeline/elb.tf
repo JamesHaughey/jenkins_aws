@@ -1,7 +1,6 @@
-
 // Jenkins ELB
 resource "aws_elb" "jenkins_elb" {
-  subnets                   = "${var.vpc_public_subnets}"
+  subnets                   = data.terraform_remote_state.vpc.outputs.Public_Subnets
   cross_zone_load_balancing = true
   security_groups           = ["${aws_security_group.elb_jenkins_sg.id}"]
   instances                 = ["${aws_instance.jenkins_master.id}"]
@@ -9,8 +8,8 @@ resource "aws_elb" "jenkins_elb" {
   listener {
     instance_port      = 8080
     instance_protocol  = "http"
-    lb_port            = 443
-    lb_protocol        = "https"
+    lb_port            = 80
+    lb_protocol        = "http"
   }
 
   health_check {

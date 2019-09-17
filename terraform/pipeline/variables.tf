@@ -1,3 +1,15 @@
+variable "vpc_remote_state_bucket" {
+  description = "The name of the S3 bucket for the vpc's remote state"
+  type = string
+  default = "jimmyhaugh-jenkins-terraform-state"
+}
+
+variable "vpc_remote_state_key" {
+  description = "The path of the the vpc's remote state"
+  type = string
+  default = "terraform/vpc/terraform.tfstate"
+}
+
 // Global variables
 
 variable "region" {
@@ -7,7 +19,7 @@ variable "region" {
 
 variable "shared_credentials_file" {
   description = "AWS credentials file path"
-  default = "None"
+  default = "C:\\Users\\Tiago\\.aws\\credentials"
 }
 
 variable "aws_profile" {
@@ -15,51 +27,19 @@ variable "aws_profile" {
   default = "terraform"
 }
 
-variable "bastion_sg_id" {
-  description = "Bastion security group ID"
-  default = "n/a"
-}
-
 variable "jenkins_username" {
   description = "Jenkins username"
-  default = "n/a"
+  default = "admin"
 }
 
 variable "jenkins_password" {
   description = "Jenkins password"
-  default = "n/a"
+  default = "Lemons"
 }
 
 variable "jenkins_credentials_id" {
   description = "Slaves SSH ID"
-  default = "n/a"
-}
-
-variable "vpc_id" {
-  description = "VPC ID"
-  default = "vpc-952f01f3"
-}
-
-variable "vpc_private_subnets" {
-  description = "List of VPC private subnets"
-  type        = "list"
-  default     = ["subnet-06d87d5c"]
-}
-
-variable "vpc_public_subnets" {
-  description = "List of VPC Public subnets"
-  type        = "list"
-  default     = ["subnet-06d87d5c"]
-}
-
-variable "hosted_zone_id" {
-  description = "slowcoder.com route53 zone id"
-  default = "n/a"
-}
-
-variable "ssl_arn" {
-  description = "SSL certificate"
-  default = "n/a"
+  default = "Lemons"
 }
 
 // Default variables
@@ -71,7 +51,7 @@ variable "vpc_cidr_block" {
 
 variable "key_name" {
   description = "SSH KeyPair"
-  default = "n/a"
+  default = "ryzen_ireland_pair"
 }
 
 // Jenkins Master
@@ -90,17 +70,10 @@ variable "jenkins_slave_instance_type" {
 
 variable "min_jenkins_slaves" {
   description = "Min slaves"
-  default     = "3"
+  default     = "1"
 }
 
 variable "max_jenkins_slaves" {
   description = "Max slaves"
-  default     = "5"
-}
-
-// Nexus
-
-variable "nexus_instance_type" {
-  description = "Nexus instance type"
-  default     = "t2.xlarge"
+  default     = "2"
 }
